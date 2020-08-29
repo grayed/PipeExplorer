@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Pipe Explorer"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "Vadim Zhukov"
 #define MyAppURL "https://github.com/grayed/PipeExplorer"
 #define MyAppExeName "PipeExplorer.exe"
@@ -44,16 +44,34 @@ Source: "bin\{#BuildConfig}\ControlzEx.dll"; DestDir: "{app}"; Flags: ignorevers
 Source: "bin\{#BuildConfig}\ControlzEx.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\DynamicData.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\DynamicData.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Abstractions.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Abstractions.Collections.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Abstractions.Collections.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Abstractions.Threading.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Abstractions.Threading.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Observable.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Observable.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.StandardExtensions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.StandardExtensions.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.StandardExtensions.ComponentModel.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.StandardExtensions.ComponentModel.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.StandardExtensions.Threading.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.StandardExtensions.Threading.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Undoable.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\IX.Undoable.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\JetBrains.Annotations.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\JetBrains.Annotations.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\MahApps.Metro.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Microsoft.Xaml.Behaviors.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\PInvoke.Kernel32.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\PInvoke.Kernel32.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.xml"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "bin\{#BuildConfig}\PInvoke.Kernel32.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "bin\{#BuildConfig}\PInvoke.Kernel32.xml"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.Fody.Helpers.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.Fody.Helpers.xml"; DestDir: "{app}"; Flags: ignoreversion
@@ -64,6 +82,12 @@ Source: "bin\{#BuildConfig}\ReactiveUI.WPF.xml"; DestDir: "{app}"; Flags: ignore
 Source: "bin\{#BuildConfig}\ReactiveUI.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Splat.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Splat.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\System.Buffers.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\System.Buffers.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\System.Memory.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\System.Memory.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\System.Numerics.Vectors.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\System.Numerics.Vectors.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.Reactive.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.Reactive.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.Runtime.CompilerServices.Unsafe.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -73,8 +97,16 @@ Source: "bin\{#BuildConfig}\System.Threading.Tasks.Extensions.xml"; DestDir: "{a
 Source: "bin\{#BuildConfig}\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.ValueTuple.xml"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "bin\{#BuildConfig}\en-US\PipeExplorer.resources.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\ru\PipeExplorer.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\en"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\en-US\*.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\es"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\fr"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\it"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\ja"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\ro"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\se"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

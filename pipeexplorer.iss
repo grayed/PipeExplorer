@@ -4,9 +4,9 @@
 #define MyAppName "Pipe Explorer"
 #define MyAppVersion "1.0"
 #define MyAppPublisher "Vadim Zhukov"
-#define MyAppURL "https://github.com/grayed/pipeexplorer"
+#define MyAppURL "https://github.com/grayed/PipeExplorer"
 #define MyAppExeName "PipeExplorer.exe"
-#define BuildConfig "Debug"
+#define BuildConfig "Release"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.

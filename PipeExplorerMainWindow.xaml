@@ -124,10 +124,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. -->
         <ListView Grid.Row="1" ItemsSource="{Binding Pipes}">
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="{x:Static res:Resources.PipeListHeaderName}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Connections}" Header="{x:Static res:Resources.PipeListHeaderConnections}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Created}" Header="{x:Static res:Resources.PipeListHeaderCreated}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Hint}" Header="{x:Static res:Resources.PipeListHeaderComment}" />
+                    <GridViewColumn x:Name="ColumnName" DisplayMemberBinding="{Binding Name}" Header="{x:Static res:Resources.PipeListHeaderName}" />
+                    <GridViewColumn x:Name="ColumnConnections" DisplayMemberBinding="{Binding Connections}" Header="{x:Static res:Resources.PipeListHeaderConnections}" />
+                    <GridViewColumn x:Name="ColumnCreated" DisplayMemberBinding="{Binding Created}" Header="{x:Static res:Resources.PipeListHeaderCreated}" />
+                    <GridViewColumn x:Name="ColumnHint" DisplayMemberBinding="{Binding Hint}" Header="{x:Static res:Resources.PipeListHeaderComment}" />
                 </GridView>
             </ListView.View>
             <ListBox.ItemContainerStyle>

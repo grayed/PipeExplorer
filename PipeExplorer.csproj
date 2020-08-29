@@ -49,6 +49,33 @@
     <Reference Include="DynamicData, Version=6.16.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\DynamicData.6.16.6\lib\net461\DynamicData.dll</HintPath>
     </Reference>
+    <Reference Include="IX.Abstractions, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.Abstractions.0.5.3\lib\net472\IX.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.Abstractions.Collections, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.Abstractions.Collections.0.5.3\lib\net472\IX.Abstractions.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.Abstractions.Threading, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.Abstractions.Threading.0.5.3\lib\net472\IX.Abstractions.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.Observable, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.Observable.0.5.3\lib\net472\IX.Observable.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.StandardExtensions, Version=0.5.5.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.StandardExtensions.0.5.5\lib\net472\IX.StandardExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.StandardExtensions.ComponentModel, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.StandardExtensions.ComponentModel.0.5.3\lib\net472\IX.StandardExtensions.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.StandardExtensions.Threading, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.StandardExtensions.Threading.0.5.3\lib\net472\IX.StandardExtensions.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="IX.Undoable, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
+      <HintPath>packages\IX.Undoable.0.5.3\lib\net472\IX.Undoable.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=2020.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>packages\JetBrains.Annotations.2020.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>packages\MahApps.Metro.2.2.0\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
@@ -81,17 +108,27 @@
       <HintPath>packages\Splat.9.5.20\lib\net461\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reactive, Version=4.4.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>packages\System.Reactive.4.4.1\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>

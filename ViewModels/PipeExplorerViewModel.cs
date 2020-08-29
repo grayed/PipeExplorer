@@ -120,8 +120,6 @@ namespace PipeExplorer.ViewModels
 
         public PipeExplorerViewModel()
         {
-            settings.Load();
-
             pipeWatcher = Locator.Current.GetService<IPipeWatcher>();
             pipeWatcher.RefreshInterval = settings.RefreshInterval;
             pipeWatcher.Created += Pipe_Created;

@@ -6,7 +6,7 @@
 #define MyAppPublisher "Vadim Zhukov"
 #define MyAppURL "https://github.com/grayed/pipeexplorer"
 #define MyAppExeName "PipeExplorer.exe"
-#define BuildConfig "Release"
+#define BuildConfig "Debug"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -22,7 +22,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={commonpf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=LICENSE.txt
+LicenseFile=LICENSE
 OutputDir=Installer
 OutputBaseFilename=setup-PipeExplorer-{#MyAppVersion}
 Compression=lzma
@@ -46,15 +46,19 @@ Source: "bin\{#BuildConfig}\DynamicData.dll"; DestDir: "{app}"; Flags: ignorever
 Source: "bin\{#BuildConfig}\DynamicData.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\MahApps.Metro.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\MahApps.Metro.IconPacks.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\MahApps.Metro.IconPacks.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\MahApps.Metro.IconPacks.Material.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\{#BuildConfig}\MahApps.Metro.IconPacks.Material.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Microsoft.Xaml.Behaviors.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\PInvoke.Kernel32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\PInvoke.Kernel32.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.Fody.Helpers.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.Fody.Helpers.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ReactiveUI.Validation.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ReactiveUI.Validation.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.WPF.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.WPF.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.xml"; DestDir: "{app}"; Flags: ignoreversion
@@ -68,6 +72,9 @@ Source: "bin\{#BuildConfig}\System.Threading.Tasks.Extensions.dll"; DestDir: "{a
 Source: "bin\{#BuildConfig}\System.Threading.Tasks.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.ValueTuple.xml"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "bin\{#BuildConfig}\en-US\PipeExplorer.resources.dll"; DestDir: "{app}\en-US"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\ru\PipeExplorer.resources.dll"; DestDir: "{app}\ru"; Flags: ignoreversion
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

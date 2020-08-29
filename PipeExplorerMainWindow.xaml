@@ -56,35 +56,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. -->
                      />
 
             <ToggleButton IsChecked="{Binding IsOpen, Source={x:Reference SettingsFlyout}}"
-                          Content="{x:Static res:Resources.Settings}"/>
-
-            <!--<metro:DropDownButton Content="{x:Static res:Resources.Settings}"
-                                  Icon="{icons:Material Kind=SettingsHelper}">
-                <metro:DropDownButton.ItemsSource>
-                    <CompositeCollection>
-                        <DockPanel>
-                            <Label Target="{x:Reference RefereshIntervalBox}" Content="{x:Static res:Resources.SettingsRefreshInterval}"/>
-                            <metro:NumericUpDown DockPanel.Dock="Right"
-                                                 x:Name="RefereshIntervalBox"
-                                                 Value="{Binding RefreshInterval}"
-                                                 StringFormat="{x:Static res:Resources.SettingsRefreshIntervalStringFormat}"
-                                                 Minimum="1" Maximum="99999"
-                                                 ParsingNumberStyle="AllowThousands"
-                                                 InterceptArrowKeys="True"
-                                                 ButtonsAlignment="Opposite"
-                                                 SwitchUpDownButtons="True"
-                                                 MinWidth="60"
-                                                 />
-                        </DockPanel>
-
-                        <metro:ToggleSwitch IsOn="{Binding StartImmediately}"
-                                            Header="{x:Static res:Resources.SettingsStartImmediatelyHeader}"
-                                            OnContent="{x:Static res:Resources.SettingsStartImmediatelyOn}"
-                                            OffContent="{x:Static res:Resources.SettingsStartImmediatelyOff}"
-                                            />
-                    </CompositeCollection>
-                </metro:DropDownButton.ItemsSource>
-            </metro:DropDownButton>-->
+                          Content="{x:Static res:Resources.Settings}"
+                          />
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
     

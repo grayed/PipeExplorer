@@ -103,9 +103,6 @@ namespace PipeExplorer
         const Int32 BufferLength = 0x00100000;
 
         private static bool IsNtSuccess(uint code) => code <= 0x7FFFFFFF;
-        private static bool IsNtInformation(uint code) => code >= 0x40000000 && code <= 0x7FFFFFFF;
-        private static bool IsNtWarning(uint code) => code >= 0x80000000 && code <= 0xBFFFFFFF;
-        private static bool IsNtError(uint code) => code >= 0xC0000000 && code <= 0xFFFFFFFF;
 
         private static Win32Exception ExceptionFromLastError()
         {

@@ -68,7 +68,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. -->
                           Position="Right"
                           Width="400"
                           >
-                <StackPanel Margin="0, 50, 16, 12">
+                <StackPanel Margin="12">
                     <metro:ToggleSwitch IsOn="{Binding StartImmediately}"
                                         Header="{x:Static res:Resources.SettingsStartImmediatelyHeader}"
                                         OnContent="{x:Static res:Resources.SettingsStartImmediatelyOn}"

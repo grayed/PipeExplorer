@@ -61,7 +61,7 @@ namespace PipeExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to allow {0} to {1}.
+        ///   Looks up a localized string similar to {0} can {1}.
         /// </summary>
         public static string AclAllowFor {
             get {
@@ -70,7 +70,7 @@ namespace PipeExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to deny {0} to {1}.
+        ///   Looks up a localized string similar to {0} cannot {1}.
         /// </summary>
         public static string AclDenyFor {
             get {

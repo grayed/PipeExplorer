@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AclAllowFor" xml:space="preserve">
-    <value>allow {0} to {1}</value>
+    <value>{0} can {1}</value>
   </data>
   <data name="AclDenyFor" xml:space="preserve">
-    <value>deny {0} to {1}</value>
+    <value>{0} cannot {1}</value>
   </data>
   <data name="AclGroup" xml:space="preserve">
     <value>Group</value>

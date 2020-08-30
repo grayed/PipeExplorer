@@ -145,9 +145,10 @@ namespace PipeExplorer.Services
             var newPipes = new Dictionary<string, PipeModel>();
             foreach (var newp in Native.GetPipes(Host))
             {
-                newPipes.Add(newp.Name, newp);
+                // do not blindly call newPipes.Add(): GetPipes() could return duplicated entries (and it's not its fault)
                 if (prevPipes.TryGetValue(newp.Name, out var oldp))
                 {
+                    newPipes[newp.Name] = newp;
                     prevPipes.Remove(newp.Name);
                     // TODO: ACL check/update
                     if (oldp != newp)
@@ -155,8 +156,17 @@ namespace PipeExplorer.Services
                         Updated?.Invoke(this, new PipeWatcherEventArgs(CollectionChangeAction.Refresh, newp));
                     }
                 }
+                else if (newPipes.TryGetValue(newp.Name, out var tmp))
+                {
+                    if (tmp != newp)
+                    {
+                        newPipes[newp.Name] = newp;
+                        Updated?.Invoke(this, new PipeWatcherEventArgs(CollectionChangeAction.Refresh, newp));
+                    }
+                }
                 else
                 {
+                    newPipes.Add(newp.Name, newp);
                     Created?.Invoke(this, new PipeWatcherEventArgs(CollectionChangeAction.Add, newp));
                 }
             }

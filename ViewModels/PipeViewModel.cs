@@ -86,13 +86,13 @@ namespace PipeExplorer.ViewModels
             {
                 sb.AppendFormat("{0}: {1}", Properties.Resources.AclOwner, acl.Owner);
                 if (!string.IsNullOrEmpty(acl.Group) || acl.Rules.Any())
-                    sb.Append(", ");
+                    sb.Append(". ");
             }
             if (!string.IsNullOrEmpty(acl.Group))
             {
                 sb.AppendFormat("{0}: {1}", Properties.Resources.AclGroup, acl.Group);
                 if (acl.Rules.Any())
-                    sb.Append(", ");
+                    sb.Append(". ");
             }
             if (acl.Rules.Any())
             {

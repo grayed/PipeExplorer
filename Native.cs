@@ -18,12 +18,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
 using PipeExplorer.Models;
+using static Vanara.PInvoke.Kernel32;
+using static Vanara.PInvoke.AdvApi32;
+using Vanara.PInvoke;
+using System.Text;
+using System.IO.Pipes;
 
 namespace PipeExplorer
 {
@@ -68,20 +71,10 @@ namespace PipeExplorer
 
     internal static class NativeMethods
     {
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern SafeFileHandle CreateFile(
-            String lpFileName,
-            UInt32 dwDesiredAccess,
-            System.IO.FileShare dwShareMode,
-            IntPtr lpSecuriryAttributes,
-            FileMode dwCreationDisposition,
-            UInt32 dwFlagsAndAttributes,
-            IntPtr hTemplateFile
-        );
-
         [DllImport("ntdll.dll")]
         internal static extern UInt32 NtQueryDirectoryFile(
-            SafeFileHandle FileHandle,
+            //SafeFileHandle FileHandle,
+            IntPtr FileHandle,
             IntPtr Event,
             IntPtr ApcRoutine,
             IntPtr ApcContext,
@@ -99,14 +92,14 @@ namespace PipeExplorer
     static class Native
     {
         const UInt32 FileDirectoryInformation = 1;
-        const UInt32 GENERIC_READ = 0x80000000;
         const Int32 BufferLength = 0x00100000;
+        const int READ_CONTROL = 0x00020000;
 
         private static bool IsNtSuccess(uint code) => code <= 0x7FFFFFFF;
 
-        private static Win32Exception ExceptionFromLastError()
+        private static System.ComponentModel.Win32Exception ExceptionFromLastError()
         {
-            return new Win32Exception(Marshal.GetLastWin32Error());
+            return new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error());
         }
 
         private static T PtrToStruct<T>(IntPtr p)
@@ -119,7 +112,8 @@ namespace PipeExplorer
             IntPtr dir, tmp;
             bool isFirstQuery = true;
 
-            var pipes = NativeMethods.CreateFile($@"\\{pipeHost}\Pipe\", GENERIC_READ, FileShare.Read, IntPtr.Zero, FileMode.Open, 0, IntPtr.Zero);
+            var pipesPath = $@"\\{pipeHost}\Pipe\";
+            var pipes = CreateFile(pipesPath, Kernel32.FileAccess.GENERIC_READ, FileShare.Read | FileShare.Write | FileShare.Delete, null, FileMode.Open, 0, HFILE.NULL);
             if (pipes.IsInvalid)
                 throw new IOException("could open named pipes list", ExceptionFromLastError());
 
@@ -129,7 +123,7 @@ namespace PipeExplorer
                 while (true)
                 {
                     var code = NativeMethods.NtQueryDirectoryFile(
-                        pipes, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, out var isb, dir,
+                        pipes.DangerousGetHandle(), IntPtr.Zero, IntPtr.Zero, IntPtr.Zero, out var isb, dir,
                         BufferLength, FileDirectoryInformation, false, IntPtr.Zero, isFirstQuery);
                     if (!IsNtSuccess(code))
                     {
@@ -141,9 +135,36 @@ namespace PipeExplorer
                     {
                         FILE_DIRECTORY_INFORMATION fdi = PtrToStruct<FILE_DIRECTORY_INFORMATION>(tmp);
                         IntPtr namePtr = (IntPtr)(FILE_DIRECTORY_INFORMATION.FileNameOffset + tmp.ToInt64());
-
                         // fdi.FileNameLength/2 - because FileNameLength is in bytes
-                        yield return new PipeModel(pipeHost, Marshal.PtrToStringUni(namePtr, (int)fdi.FileNameLength/2), (int)fdi.AllocationSize.LowPart, fdi.EndOfFile.LowPart, null /* TODO */);
+                        var name = Marshal.PtrToStringUni(namePtr, (int)fdi.FileNameLength / 2);
+
+                        AclModel acl = null;
+                        var handle = CreateFile(pipesPath + name, (Kernel32.FileAccess)READ_CONTROL,
+                            FileShare.Read | FileShare.Write | FileShare.Delete, null, FileMode.Open, 0, HFILE.NULL);
+                        if (!handle.IsInvalid)
+                        {
+                            using (handle)
+                            {
+                                //ACL? dacl = new ACL(), sacl = null;
+                                //SECURITY_DESCRIPTOR? attrs = null;
+                                //IntPtr ownerSid = new IntPtr(), groupSid = new IntPtr();
+                                var err = GetSecurityInfo(handle.DangerousGetHandle(), SE_OBJECT_TYPE.SE_FILE_OBJECT,
+                                    SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION | SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION | SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                                    out var ownerSid, out var groupSid, out var dacl, out _, out _);
+                                if (err.Succeeded)
+                                {
+                                    StringBuilder ownerNameBuf = new StringBuilder(1024), groupNameBuf = new StringBuilder(1024), domainBuf = new StringBuilder(1024);
+                                    int ownerNameBufLen = ownerNameBuf.Capacity, groupNameBufLen = ownerNameBuf.Capacity, domainBufLen = domainBuf.Capacity;
+                                    LookupAccountSid(null, ownerSid, ownerNameBuf, ref ownerNameBufLen, domainBuf, ref domainBufLen, out var ownerAccType);
+                                    LookupAccountSid(null, groupSid, groupNameBuf, ref groupNameBufLen, null, ref domainBufLen, out var groupAccType);
+                                    //
+
+                                    acl = new AclModel(ownerNameBuf.ToString(), groupNameBuf.ToString(), null);
+                                }
+                            }
+                        }
+
+                        yield return new PipeModel(pipeHost, name, (int)fdi.AllocationSize.LowPart, fdi.EndOfFile.LowPart, acl);
 
                         if (fdi.NextEntryOffset == 0)
                             break;

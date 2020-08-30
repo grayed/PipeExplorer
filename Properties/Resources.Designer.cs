@@ -61,6 +61,51 @@ namespace PipeExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to allow {0} to {1}.
+        /// </summary>
+        public static string AclAllowFor {
+            get {
+                return ResourceManager.GetString("AclAllowFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to deny {0} to {1}.
+        /// </summary>
+        public static string AclDenyFor {
+            get {
+                return ResourceManager.GetString("AclDenyFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
+        public static string AclGroup {
+            get {
+                return ResourceManager.GetString("AclGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string AclOwner {
+            get {
+                return ResourceManager.GetString("AclOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rules.
+        /// </summary>
+        public static string AclRules {
+            get {
+                return ResourceManager.GetString("AclRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to before {0}.
         /// </summary>
         public static string DateCreatedUpToFormatted {
@@ -111,6 +156,15 @@ namespace PipeExplorer.Properties {
         public static string ErrorMustBePositive {
             get {
                 return ResourceManager.GetString("ErrorMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ACL.
+        /// </summary>
+        public static string PipeListHeaderAcl {
+            get {
+                return ResourceManager.GetString("PipeListHeaderAcl", resourceCulture);
             }
         }
         

@@ -71,6 +71,8 @@ namespace PipeExplorer
                 ColumnCreated.Width = width;
             if (settings.ColumnWidths.TryGetValue("Hint", out width) && width >= 0)
                 ColumnHint.Width = width;
+            if (settings.ColumnWidths.TryGetValue("ACL", out width) && width >= 0)
+                ColumnAcl.Width = width;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -86,6 +88,7 @@ namespace PipeExplorer
             settings.ColumnWidths["Connections"] = (int)ColumnConnections.ActualWidth;
             settings.ColumnWidths["Created"] = (int)ColumnCreated.ActualWidth;
             settings.ColumnWidths["Hint"] = (int)ColumnHint.ActualWidth;
+            settings.ColumnWidths["ACL"] = (int)ColumnAcl.ActualWidth;
 
             settings.Save();
             base.OnClosed(e);

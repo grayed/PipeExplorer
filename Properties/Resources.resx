@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AclAllowFor" xml:space="preserve">
+    <value>allow {0} to {1}</value>
+  </data>
+  <data name="AclDenyFor" xml:space="preserve">
+    <value>deny {0} to {1}</value>
+  </data>
+  <data name="AclGroup" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="AclOwner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="AclRules" xml:space="preserve">
+    <value>Rules</value>
+  </data>
   <data name="DateCreatedUpToFormatted" xml:space="preserve">
     <value>before {0}</value>
   </data>
@@ -134,6 +149,9 @@
   </data>
   <data name="ErrorMustBePositive" xml:space="preserve">
     <value>Must be larger than zero фыфы</value>
+  </data>
+  <data name="PipeListHeaderAcl" xml:space="preserve">
+    <value>ACL</value>
   </data>
   <data name="PipeListHeaderComment" xml:space="preserve">
     <value>Comment</value>

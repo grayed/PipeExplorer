@@ -18,9 +18,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO.Pipes;
-using System.Linq;
-using System.Security.Principal;
 
 namespace PipeExplorer.Models
 {
@@ -30,19 +27,19 @@ namespace PipeExplorer.Models
         public string Name { get; }
         public string Hint { get; }
         public int MaxConnections { get; }
-        public PipeSecurity Acl { get; }
+        public AclModel Acl { get; }
         public uint ActiveConnections { get; }
 
         public string Path => $@"\\{Host}\{Name}";
 
-        public PipeModel(string host, string name, int maxConn, uint activeConn, PipeSecurity acl)
+        public PipeModel(string host, string name, int maxConn, uint activeConn, AclModel acl)
         {
             Host = host ?? throw new ArgumentNullException(nameof(host));
             Name = name ?? throw new ArgumentNullException(nameof(name));
             MaxConnections = maxConn;
             ActiveConnections = activeConn;
             Hint = GetHintFor(name);
-            Acl = acl ?? new PipeSecurity();
+            Acl = acl ?? new AclModel(null, null, null);
         }
 
         public static string GetHintFor(string pipeName)
@@ -106,7 +103,7 @@ namespace PipeExplorer.Models
                    Name == other.Name &&
                    ActiveConnections == other.ActiveConnections &&
                    MaxConnections == other.MaxConnections &&
-                   AreAclsEqual(Acl, other.Acl) &&
+                   Acl.Equals(other.Acl) &&
                    Hint == other.Hint;
         }
 
@@ -117,7 +114,7 @@ namespace PipeExplorer.Models
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
             hashCode = hashCode * -1521134295 + ActiveConnections.GetHashCode();
             hashCode = hashCode * -1521134295 + MaxConnections.GetHashCode();
-            hashCode = hashCode * -1521134295 + GetAclHashCode(Acl);
+            hashCode = hashCode * -1521134295 + Acl.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Hint);
             return hashCode;
         }
@@ -130,69 +127,6 @@ namespace PipeExplorer.Models
         public static bool operator !=(PipeModel left, PipeModel right)
         {
             return !(left == right);
-        }
-
-        private static bool AreAclsEqual(PipeSecurity acl1, PipeSecurity acl2)
-        {
-            var list1 = acl1.GetAccessRules(true, true, typeof(SecurityIdentifier)).OfType<PipeAccessRule>().OrderBy(r => r, aclRuleComparer).ToList();
-            var list2 = acl2.GetAccessRules(true, true, typeof(SecurityIdentifier)).OfType<PipeAccessRule>().OrderBy(r => r, aclRuleComparer).ToList();
-            return list1.SequenceEqual(list2, aclRuleEqualityComparer);
-        }
-
-        private static int GetAclHashCode(PipeSecurity acl)
-        {
-            int hashCode = -1622615647;
-            foreach (var rule in acl.GetAccessRules(true, true, typeof(SecurityIdentifier)).OfType<PipeAccessRule>().OrderBy(r => r, aclRuleComparer))
-            {
-                hashCode = hashCode * -1521134295 + aclRuleEqualityComparer.GetHashCode();
-            }
-            return hashCode;
-        }
-
-        private static readonly IEqualityComparer<PipeAccessRule> aclRuleEqualityComparer = new AclRuleEqualityComparer();
-        private static readonly IComparer<PipeAccessRule> aclRuleComparer = Comparer<PipeAccessRule>.Create(PipeAcccessRuleComparision);
-
-        private class AclRuleEqualityComparer : IEqualityComparer<PipeAccessRule>
-        {
-            public bool Equals(PipeAccessRule x, PipeAccessRule y)
-            {
-                return x.IdentityReference == y.IdentityReference &&
-                       x.IsInherited == y.IsInherited &&
-                       x.InheritanceFlags == y.InheritanceFlags &&
-                       x.PropagationFlags == y.PropagationFlags &&
-                       x.AccessControlType == y.AccessControlType &&
-                       x.PipeAccessRights == y.PipeAccessRights;
-            }
-
-            public int GetHashCode(PipeAccessRule rule)
-            {
-                int hashCode = -228291695;
-                hashCode = hashCode * -1521134295 + rule.IdentityReference.GetHashCode();
-                hashCode = hashCode * -1521134295 + rule.IsInherited.GetHashCode();
-                hashCode = hashCode * -1521134295 + rule.InheritanceFlags.GetHashCode();
-                hashCode = hashCode * -1521134295 + rule.PropagationFlags.GetHashCode();
-                hashCode = hashCode * -1521134295 + rule.AccessControlType.GetHashCode();
-                hashCode = hashCode * -1521134295 + rule.PipeAccessRights.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        private static int PipeAcccessRuleComparision(PipeAccessRule x, PipeAccessRule y)
-        {
-            int delta;
-            if ((delta = x.IdentityReference.Value.CompareTo(y.IdentityReference.Value)) != 0)
-                return delta;
-            if ((delta = x.PipeAccessRights.CompareTo(y.PipeAccessRights)) != 0)
-                return delta;
-            if ((delta = x.AccessControlType.CompareTo(y.AccessControlType)) != 0)
-                return delta;
-            if ((delta = x.IsInherited.CompareTo(y.IsInherited)) != 0)
-                return delta;
-            if ((delta = x.InheritanceFlags.CompareTo(y.InheritanceFlags)) != 0)
-                return delta;
-            if ((delta = x.PropagationFlags.CompareTo(y.PropagationFlags)) != 0)
-                return delta;
-            return 0;
         }
     }
 }

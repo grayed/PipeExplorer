@@ -128,6 +128,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. -->
                     <GridViewColumn x:Name="ColumnConnections" DisplayMemberBinding="{Binding Connections}" Header="{x:Static res:Resources.PipeListHeaderConnections}" />
                     <GridViewColumn x:Name="ColumnCreated" DisplayMemberBinding="{Binding Created}" Header="{x:Static res:Resources.PipeListHeaderCreated}" />
                     <GridViewColumn x:Name="ColumnHint" DisplayMemberBinding="{Binding Hint}" Header="{x:Static res:Resources.PipeListHeaderComment}" />
+                    <GridViewColumn x:Name="ColumnAcl" DisplayMemberBinding="{Binding PlainAcl}" Header="{x:Static res:Resources.PipeListHeaderAcl}" />
                 </GridView>
             </ListView.View>
             <ListBox.ItemContainerStyle>

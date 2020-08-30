@@ -18,7 +18,10 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using DynamicData.Binding;
 using PipeExplorer.Models;
 using PipeExplorer.Services;
 using ReactiveUI;
@@ -37,8 +40,8 @@ namespace PipeExplorer.ViewModels
         [Reactive] public string MaxConnections { get; private set; }
         [Reactive] public uint ActiveConnections { get; private set; }
         [Reactive] public string Connections { get; private set; }
-        public AclViewModel Acl { get; }
-        public string PlainAcl => "";   // TODO
+        [Reactive] public AclModel Acl { get; private set; }
+        [Reactive] public string PlainAcl { get; private set; }
 
         [Reactive] public bool BeingRemoved { get; private set; }
         [Reactive] public bool RecentlyUpdated { get; private set; }
@@ -58,7 +61,6 @@ namespace PipeExplorer.ViewModels
             Host = model.Host;
             Name = model.Name;
             Path = model.Path;
-            Acl = new AclViewModel(model.Acl);
             
             var nowStr = DateTime.Now.ToString(CultureInfo.CurrentUICulture);
             if (markAsRecentlyAdded)
@@ -72,8 +74,32 @@ namespace PipeExplorer.ViewModels
             }
 
             SyncWithModel(model);
+            this.WhenValueChanged(x => x.Acl).Subscribe(UpdatePlainAcl);
 
             Task.Delay(Locator.Current.GetService<ISettings>().HighlightDuration).ContinueWith(_ => RecentlyAdded = false);
+        }
+
+        private void UpdatePlainAcl(AclModel acl)
+        {
+            var sb = new StringBuilder();
+            if (!string.IsNullOrEmpty(acl.Owner))
+            {
+                sb.AppendFormat("{0}: {1}", Properties.Resources.AclOwner, acl.Owner);
+                if (!string.IsNullOrEmpty(acl.Group) || acl.Rules.Any())
+                    sb.Append(", ");
+            }
+            if (!string.IsNullOrEmpty(acl.Group))
+            {
+                sb.AppendFormat("{0}: {1}", Properties.Resources.AclGroup, acl.Group);
+                if (acl.Rules.Any())
+                    sb.Append(", ");
+            }
+            if (acl.Rules.Any())
+            {
+                var rules = string.Join("; ", acl.Rules.Select(r => r.ToString()));
+                sb.AppendFormat("{0}: {1}", Properties.Resources.AclRules, rules);
+            }
+            PlainAcl = sb.ToString();
         }
 
         public void Update(PipeModel model)
@@ -110,6 +136,7 @@ namespace PipeExplorer.ViewModels
             MaxConnections = model.MaxConnections >= 0 ? model.MaxConnections.ToString() : "∞";
             Connections = $"{ActiveConnections} / {MaxConnections}";
             Hint = model.Hint;
+            Acl = model.Acl;
         }
     }
 }

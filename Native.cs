@@ -142,7 +142,8 @@ namespace PipeExplorer
                         FILE_DIRECTORY_INFORMATION fdi = PtrToStruct<FILE_DIRECTORY_INFORMATION>(tmp);
                         IntPtr namePtr = (IntPtr)(FILE_DIRECTORY_INFORMATION.FileNameOffset + tmp.ToInt64());
 
-                        yield return new PipeModel(pipeHost, Marshal.PtrToStringUni(namePtr), (int)fdi.AllocationSize.LowPart, fdi.EndOfFile.LowPart, null /* TODO */);
+                        // fdi.FileNameLength/2 - because FileNameLength is in bytes
+                        yield return new PipeModel(pipeHost, Marshal.PtrToStringUni(namePtr, (int)fdi.FileNameLength/2), (int)fdi.AllocationSize.LowPart, fdi.EndOfFile.LowPart, null /* TODO */);
 
                         if (fdi.NextEntryOffset == 0)
                             break;

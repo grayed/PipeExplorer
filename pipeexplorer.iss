@@ -66,12 +66,6 @@ Source: "bin\{#BuildConfig}\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignorev
 Source: "bin\{#BuildConfig}\MahApps.Metro.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\Microsoft.Xaml.Behaviors.xml"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.dll"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "bin\{#BuildConfig}\PInvoke.AdvApi32.xml"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "bin\{#BuildConfig}\PInvoke.Kernel32.dll"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "bin\{#BuildConfig}\PInvoke.Kernel32.xml"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-; Source: "bin\{#BuildConfig}\PInvoke.Windows.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.Fody.Helpers.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ReactiveUI.Fody.Helpers.xml"; DestDir: "{app}"; Flags: ignoreversion
@@ -96,6 +90,16 @@ Source: "bin\{#BuildConfig}\System.Threading.Tasks.Extensions.dll"; DestDir: "{a
 Source: "bin\{#BuildConfig}\System.Threading.Tasks.Extensions.xml"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.ValueTuple.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\System.ValueTuple.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.Core.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Cryptography.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Cryptography.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Kernel32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Kernel32.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Security.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Security.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Shared.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\{#BuildConfig}\Vanara.PInvoke.Shared.xml"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\de"; Flags: ignoreversion
 Source: "bin\{#BuildConfig}\ru\*.dll"; DestDir: "{app}\en"; Flags: ignoreversion

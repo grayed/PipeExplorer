@@ -6,6 +6,7 @@ A Windows named pipe monitoring GUI. Requires administrator priviledges to run.
 - Displays name and number of active/maximum connections, like [pipelist.exe](https://docs.microsoft.com/en-us/sysinternals/downloads/pipelist) from [SysInternals Suite](https://docs.microsoft.com/en-us/sysinternals/) does, and creation timestamp as a bonus.
 - Highlights newly created and removed pipes, like [Process Explorer](https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer) from SysInternals Suite does.
 - Gives hints about well-known pipe names.
+- Pipe pinning, allowing to place all the pipes you're interested in together.
 - Multilanguage support (English and Russian for now).
 
 ![Screenshot!](screenshot.png)
@@ -18,6 +19,6 @@ The named pipes that get quickly created and deleted (or deleted and re-created)
 
 ## TODO
 
-- ACL extraction and displaying.
+- Extraction of ACLs for pipes which only SYSTEM has access to.
 - More/better hints (see the GetHintFor() function in Models/PipeModel.cs).
 - Keep selected line in view when many named pipes gets created or deleted.

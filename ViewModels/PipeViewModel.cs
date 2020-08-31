@@ -49,8 +49,6 @@ namespace PipeExplorer.ViewModels
         [Reactive] public bool RecentlyAdded { get; private set; }
         [Reactive] public bool Pinned { get; set; }
 
-        public ICommand SwitchPinnedStateCmd { get; }
-
         private DateTime lastUpdateTimestamp;
 
         public void MarkForRemoval()
@@ -60,13 +58,14 @@ namespace PipeExplorer.ViewModels
             BeingRemoved = true;
         }
 
-        public PipeViewModel(PipeModel model, bool markAsRecentlyAdded = true)
+        public PipeViewModel(PipeModel model, bool pinned, bool markAsRecentlyAdded = true)
         {
             Host = model.Host;
             Name = model.Name;
             Path = model.Path;
 
-            SwitchPinnedStateCmd = ReactiveCommand.Create(() => Pinned = !Pinned);
+            Pinned = pinned;
+            this.WhenValueChanged(x => x.Pinned).Subscribe(UpdatePinnedNames);
 
             var nowStr = DateTime.Now.ToString(CultureInfo.CurrentUICulture);
             if (markAsRecentlyAdded)
@@ -83,6 +82,15 @@ namespace PipeExplorer.ViewModels
             this.WhenValueChanged(x => x.Acl).Subscribe(UpdatePlainAcl);
 
             Task.Delay(Locator.Current.GetService<ISettings>().HighlightDuration).ContinueWith(_ => RecentlyAdded = false);
+        }
+
+        private void UpdatePinnedNames(bool isPinned)
+        {
+            var names = Locator.Current.GetService<ISettings>().PinnedNames;
+            if (isPinned)
+                names.Add(Name);
+            else
+                names.Remove(Name);
         }
 
         private void UpdatePlainAcl(AclModel acl)

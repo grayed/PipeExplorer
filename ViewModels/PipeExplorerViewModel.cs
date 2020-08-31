@@ -163,7 +163,7 @@ namespace PipeExplorer.ViewModels
                 .Select(v => (ImageSource)App.Current.FindResource(v ? "AppIconActive" : "AppIcon"))
                 .Subscribe(v => AppIcon = v);
 
-            pipesCache.AddOrUpdate(Native.GetPipes().Select(p => new PipeViewModel(p, false)));
+            pipesCache.AddOrUpdate(Native.GetPipes().Select(p => new PipeViewModel(p, settings.PinnedNames.Contains(p.Name), false)));
             IsRunning = settings.StartImmediately;
         }
 
@@ -173,11 +173,11 @@ namespace PipeExplorer.ViewModels
             if (opt.HasValue && opt.Value.BeingRemoved)
             {
                 pipesCache.RemoveKey(e.Pipe.Path);
-                pipesCache.AddOrUpdate(new PipeViewModel(e.Pipe));
+                pipesCache.AddOrUpdate(new PipeViewModel(e.Pipe, settings.PinnedNames.Contains(e.Pipe.Name)));
             }
             else if (!opt.HasValue)     // avoid re-creation of view models on startup
             {
-                pipesCache.AddOrUpdate(new PipeViewModel(e.Pipe));
+                pipesCache.AddOrUpdate(new PipeViewModel(e.Pipe, settings.PinnedNames.Contains(e.Pipe.Name)));
             }
         }
 

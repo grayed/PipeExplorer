@@ -76,6 +76,7 @@ namespace PipeExplorer.Services
             ColumnWidths.ToObservableChangeSet<ObservableDictionary<string, int>, KeyValuePair<string, int>>()
                 .CastToObject()
                 .Concat(this.WhenAnyPropertyChanged().ToObservableChangeSet().CastToObject())
+                .Concat(PinnedNames.ToObservableChangeSet<ObservableSet<string>, string>().CastToObject())
                 .Throttle(TimeSpan.FromSeconds(1))
                 .Subscribe(_ => Save());
         }

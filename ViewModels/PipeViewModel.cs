@@ -21,6 +21,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using DynamicData.Binding;
 using PipeExplorer.Models;
 using PipeExplorer.Services;
@@ -30,12 +31,12 @@ using Splat;
 
 namespace PipeExplorer.ViewModels
 {
-    class PipeViewModel : ReactiveObject
+    class PipeViewModel : ReactiveObject, IComparable<PipeViewModel>, IComparable
     {
         public string Host { get; }
         public string Name { get; }
         public string Path { get; }
-        public string Created { get; private set; }
+        [Reactive] public string Created { get; private set; }
         [Reactive] public string Hint { get; private set; }
         [Reactive] public string MaxConnections { get; private set; }
         [Reactive] public uint ActiveConnections { get; private set; }
@@ -46,6 +47,9 @@ namespace PipeExplorer.ViewModels
         [Reactive] public bool BeingRemoved { get; private set; }
         [Reactive] public bool RecentlyUpdated { get; private set; }
         [Reactive] public bool RecentlyAdded { get; private set; }
+        [Reactive] public bool Pinned { get; set; }
+
+        public ICommand SwitchPinnedStateCmd { get; }
 
         private DateTime lastUpdateTimestamp;
 
@@ -61,7 +65,9 @@ namespace PipeExplorer.ViewModels
             Host = model.Host;
             Name = model.Name;
             Path = model.Path;
-            
+
+            SwitchPinnedStateCmd = ReactiveCommand.Create(() => Pinned = !Pinned);
+
             var nowStr = DateTime.Now.ToString(CultureInfo.CurrentUICulture);
             if (markAsRecentlyAdded)
             {
@@ -137,6 +143,22 @@ namespace PipeExplorer.ViewModels
             Connections = $"{ActiveConnections} / {MaxConnections}";
             Hint = model.Hint;
             Acl = model.Acl;
+        }
+
+        public int CompareTo(PipeViewModel other)
+        {
+            if (this.Pinned && !other.Pinned)
+                return -1;
+            if (other.Pinned && !this.Pinned)
+                return 1;
+            return this.Name.CompareTo(other.Name);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is PipeViewModel other)
+                return CompareTo(other);
+            return 1;
         }
     }
 }

@@ -166,10 +166,12 @@
     <Compile Include="Models\AclModel.cs" />
     <Compile Include="Native.cs" />
     <Compile Include="Models\PipeModel.cs" />
+    <Compile Include="Services\ObservableSet.cs" />
     <Compile Include="Services\PipeWatcher.cs" />
     <Compile Include="Services\Settings.cs" />
     <Compile Include="ViewModels\AclViewModel.cs" />
     <Compile Include="ViewModels\AdvancedBooleanToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\ChooseConverter.cs" />
     <Compile Include="ViewModels\PipeExplorerViewModel.cs" />
     <Compile Include="ViewModels\PipeViewModel.cs" />
     <Page Include="PipeExplorerMainWindow.xaml">

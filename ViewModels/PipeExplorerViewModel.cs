@@ -147,7 +147,8 @@ namespace PipeExplorer.ViewModels
                 .Connect()
                 .Batch(TimeSpan.FromMilliseconds(300))
                 .Filter(this.WhenValueChanged(x => x.QuickFilter).Select(BuildFilter))
-                .Sort(SortExpressionComparer<PipeViewModel>.Ascending(p => p.Name))
+                .AutoRefresh(p => p.Pinned)
+                .Sort(SortExpressionComparer<PipeViewModel>.Ascending(p => p))
                 .ObserveOnDispatcher()
                 .Bind(out var pipesCol)
                 .Subscribe();

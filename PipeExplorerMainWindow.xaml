@@ -124,6 +124,19 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. -->
         <ListView Grid.Row="1" ItemsSource="{Binding Pipes}">
             <ListView.View>
                 <GridView AllowsColumnReorder="True">
+                    <GridViewColumn x:Name="ColumnPin" Width="24">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Pinned}">
+                                    <CheckBox.Template>
+                                        <ControlTemplate TargetType="CheckBox">
+                                            <Image Source="{Binding Pinned, Converter={StaticResource ChooseConverter}, ConverterParameter={StaticResource PinnedIcons}}" Margin="1" />
+                                        </ControlTemplate>
+                                    </CheckBox.Template>
+                                </CheckBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn x:Name="ColumnName" DisplayMemberBinding="{Binding Name}" Header="{x:Static res:Resources.PipeListHeaderName}" />
                     <GridViewColumn x:Name="ColumnConnections" DisplayMemberBinding="{Binding Connections}" Header="{x:Static res:Resources.PipeListHeaderConnections}" />
                     <GridViewColumn x:Name="ColumnCreated" DisplayMemberBinding="{Binding Created}" Header="{x:Static res:Resources.PipeListHeaderCreated}" />

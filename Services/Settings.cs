@@ -17,11 +17,10 @@
 #endregion
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Security;
 using System.Text.RegularExpressions;
@@ -47,6 +46,7 @@ namespace PipeExplorer.Services
         WindowState WindowState { get; set; }
         Rect WindowPosition { get; set; }
         IDictionary<string, int> ColumnWidths { get; }
+        ISet<string> PinnedNames { get; }
 
         void Save();
     }
@@ -61,8 +61,10 @@ namespace PipeExplorer.Services
         [Reactive] public WindowState WindowState { get; set; } = WindowState.Normal;
         [Reactive] public Rect WindowPosition { get; set; }
         public ObservableDictionary<string, int> ColumnWidths { get; } = new ObservableDictionary<string, int>();
+        public ObservableSet<string> PinnedNames { get; } = new ObservableSet<string>();
 
         IDictionary<string, int> ISettings.ColumnWidths => ColumnWidths;
+        ISet<string> ISettings.PinnedNames => PinnedNames;
 
         public Settings()
         {
@@ -131,6 +133,14 @@ namespace PipeExplorer.Services
                                 ColumnWidths.Add(match.Groups[1].Value, width);
                         }
                     }
+
+                    var pinnedKey = regKey.OpenSubKey("Pinned");
+                    if (pinnedKey is null)
+                        return;
+                    using (pinnedKey)
+                    {
+                        PinnedNames.AddRange(pinnedKey.GetValueNames());
+                    }
                 }
             }
             catch (SecurityException) { }
@@ -143,7 +153,7 @@ namespace PipeExplorer.Services
             try
             {
                 var regKey = Registry.CurrentUser.CreateSubKey(regPath);
-                if (regKey == null)
+                if (regKey is null)
                 {
                     await ((MetroWindow)App.Current.MainWindow).ShowMessageAsync(Properties.Resources.ErrorAccessingRegistry, Properties.Resources.ErrorCouldNotSaveSettings);
                     return;
@@ -164,6 +174,27 @@ namespace PipeExplorer.Services
                         regKey.SetValue("Columns", string.Join(" ", ColumnWidths.Select(kv => $"{kv.Key}={kv.Value}")), RegistryValueKind.String);
                     else
                         regKey.DeleteValue("Columns", false);
+
+                    using (var pinnedKey = regKey.CreateSubKey("Pinned"))
+                    {
+                        if (pinnedKey is null)
+                        {
+                            await ((MetroWindow)App.Current.MainWindow).ShowMessageAsync(Properties.Resources.ErrorAccessingRegistry, Properties.Resources.ErrorCouldNotSaveSettings);
+                            return;
+                        }
+                        var existingValues = pinnedKey.GetValueNames();
+                        
+                        var extra = existingValues.ToHashSet();
+                        extra.ExceptWith(PinnedNames);
+                        foreach (var name in extra)
+                            pinnedKey.DeleteValue(name, false);
+                        
+                        var newNames = PinnedNames.ToHashSet();
+                        newNames.ExceptWith(existingValues);
+                        foreach (var name in newNames)
+                            pinnedKey.SetValue(name, 1, RegistryValueKind.DWord);
+
+                    }
                 }
             }
             catch (SecurityException sex)

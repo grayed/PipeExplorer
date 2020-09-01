@@ -21,7 +21,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using DynamicData.Binding;
 using PipeExplorer.Models;
 using PipeExplorer.Services;

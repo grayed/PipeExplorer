@@ -24,7 +24,6 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using IX.Observable;
-using MahApps.Metro.Controls;
 
 namespace PipeExplorer.Services
 {

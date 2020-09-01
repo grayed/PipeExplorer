@@ -17,8 +17,6 @@
 #endregion
 
 using System.Windows;
-using PipeExplorer.Services;
-using Splat;
 
 namespace PipeExplorer
 {
@@ -27,12 +25,5 @@ namespace PipeExplorer
     /// </summary>
     public partial class App : Application
     {
-        //protected override void OnStartup(StartupEventArgs e)
-        //{
-        //    Locator.CurrentMutable.Register<IPipeWatcher>(() => new PipeWatcher());
-        //    Locator.CurrentMutable.RegisterConstant<ISettings>(new Settings());
-
-        //    base.OnStartup(e);
-        //}
     }
 }

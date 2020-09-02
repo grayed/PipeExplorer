@@ -13,12 +13,13 @@ A Windows named pipe monitoring GUI. Requires administrator priviledges to run.
 
 ## Known issues
 
-Since Windows doesn't keep timestamps of pipe creation, the creation timestamp is determined by the time the named pipe is first seen.
+- The NPFS driver doesn't keep timestamps of pipe creation, so the creation timestamp is determined by the time the named pipe is first seen.
+- The named pipes that get quickly created and deleted (or deleted and re-created) between scans won't be noticed about at all.
+- The ACLs could not be extracted from pipes without a free server end. Also, for the same reason reading of ACLs may disrupt processes trying to connect to the same ACL.
 
-The named pipes that get quickly created and deleted (or deleted and re-created) between scans won't be noticed about at all.
+All of those could be fixed by installing a filesystem filter driver which will gather and export this information. Unfortunately, somebody needs to write such driver first.
 
 ## TODO
 
-- Extraction of ACLs for pipes which only SYSTEM has access to.
 - More/better hints (see the GetHintFor() function in Models/PipeModel.cs).
 - Keep selected line in view when many named pipes gets created or deleted.

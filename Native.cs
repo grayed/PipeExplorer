@@ -140,64 +140,63 @@ namespace PipeExplorer
                         var name = Marshal.PtrToStringUni(namePtr, (int)fdi.FileNameLength / 2);
 
                         AclModel acl = null;
-                        var handle = CreateFile(pipesPath + name, (Kernel32.FileAccess)READ_CONTROL,
-                            FileShare.Read | FileShare.Write | FileShare.Delete, null, FileMode.Open, 0, HFILE.NULL);
-                        if (!handle.IsInvalid)
+                        var err = GetNamedSecurityInfo(pipesPath + name, SE_OBJECT_TYPE.SE_FILE_OBJECT,
+                            SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION | SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION | SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
+                            out var ownerSid, out var groupSid, out var dacl, out _, out var sd);
+                        if (err.Succeeded)
                         {
-                            using (handle)
+                            try
                             {
-                                var err = GetSecurityInfo(handle.DangerousGetHandle(), SE_OBJECT_TYPE.SE_FILE_OBJECT,
-                                    SECURITY_INFORMATION.OWNER_SECURITY_INFORMATION | SECURITY_INFORMATION.GROUP_SECURITY_INFORMATION | SECURITY_INFORMATION.DACL_SECURITY_INFORMATION,
-                                    out var ownerSid, out var groupSid, out var dacl, out _, out _);
-                                if (err.Succeeded)
+                                int ownerNameBufLen = 1024, groupNameBufLen = 1024, domainBufLen = 1024;
+                                StringBuilder ownerNameBuf = new StringBuilder(ownerNameBufLen);
+                                StringBuilder groupNameBuf = new StringBuilder(groupNameBufLen);
+                                StringBuilder domainBuf = new StringBuilder(domainBufLen);
+                                LookupAccountSid(null, ownerSid, ownerNameBuf, ref ownerNameBufLen, domainBuf, ref domainBufLen, out var ownerAccType);
+                                LookupAccountSid(null, groupSid, groupNameBuf, ref groupNameBufLen, null, ref domainBufLen, out var groupAccType);
+
+                                List<AclRuleModel> rules = null;
+                                if (dacl.IsValidAcl())
                                 {
-                                    int ownerNameBufLen = 1024, groupNameBufLen = 1024, domainBufLen = 1024;
-                                    StringBuilder ownerNameBuf = new StringBuilder(ownerNameBufLen);
-                                    StringBuilder groupNameBuf = new StringBuilder(groupNameBufLen);
-                                    StringBuilder domainBuf = new StringBuilder(domainBufLen);
-                                    LookupAccountSid(null, ownerSid, ownerNameBuf, ref ownerNameBufLen, domainBuf, ref domainBufLen, out var ownerAccType);
-                                    LookupAccountSid(null, groupSid, groupNameBuf, ref groupNameBufLen, null, ref domainBufLen, out var groupAccType);
-
-                                    List<AclRuleModel> rules = null;
-                                    if (dacl.IsValidAcl())
+                                    var cnt = dacl.AceCount();
+                                    rules = new List<AclRuleModel>((int)cnt);
+                                    for (uint i = 0; i < cnt; i++)
                                     {
-                                        var cnt = dacl.AceCount();
-                                        rules = new List<AclRuleModel>((int)cnt);
-                                        for (uint i = 0; i < cnt; i++)
+                                        if (GetAce(dacl, i, out var ace))
                                         {
-                                            if (GetAce(dacl, i, out var ace))
+                                            var sid = ace.GetSid();
+                                            int sidNameLen = 1024, sidDomainLen = 1024;
+                                            StringBuilder sidNameBuf = new StringBuilder(sidNameLen);
+                                            StringBuilder sidDomainBuf = new StringBuilder(sidDomainLen);
+                                            LookupAccountSid(null, sid, sidNameBuf, ref sidNameLen, sidDomainBuf, ref sidDomainLen, out var sidAccType);
+
+                                            bool isAllowing;
+                                            switch (ace.GetHeader().AceType)
                                             {
-                                                var sid = ace.GetSid();
-                                                int sidNameLen = 1024, sidDomainLen = 1024;
-                                                StringBuilder sidNameBuf = new StringBuilder(sidNameLen);
-                                                StringBuilder sidDomainBuf = new StringBuilder(sidDomainLen);
-                                                LookupAccountSid(null, sid, sidNameBuf, ref sidNameLen, sidDomainBuf, ref sidDomainLen, out var sidAccType);
-
-                                                bool isAllowing;
-                                                switch (ace.GetHeader().AceType)
-                                                {
-                                                    case AceType.AccessAllowed:
-                                                        isAllowing = true;
-                                                        break;
-                                                    case AceType.AccessDenied:
-                                                        isAllowing = false;
-                                                        break;
-                                                    default:
-                                                        continue;
-                                                }
-
-                                                var mask = ace.GetMask();
-                                                // make Enum formatter happy, since there are no flags for 0x60 bits
-                                                mask &= 0xFFFFFF9F;
-
-                                                if (sidNameBuf.Length > 0)
-                                                    rules.Add(new AclRuleModel(sidNameBuf.ToString(), isAllowing, (PipeAccessRights)mask));
+                                                case AceType.AccessAllowed:
+                                                    isAllowing = true;
+                                                    break;
+                                                case AceType.AccessDenied:
+                                                    isAllowing = false;
+                                                    break;
+                                                default:
+                                                    continue;
                                             }
+
+                                            var mask = ace.GetMask();
+                                            // make Enum formatter happy, since there are no flags for 0x60 bits
+                                            mask &= 0xFFFFFF9F;
+
+                                            if (sidNameBuf.Length > 0)
+                                                rules.Add(new AclRuleModel(sidNameBuf.ToString(), isAllowing, (PipeAccessRights)mask));
                                         }
                                     }
-
-                                    acl = new AclModel(ownerNameBuf.ToString(), groupNameBuf.ToString(), rules);
                                 }
+
+                                acl = new AclModel(ownerNameBuf.ToString(), groupNameBuf.ToString(), rules);
+                            }
+                            finally
+                            {
+                                sd.Dispose();
                             }
                         }
 

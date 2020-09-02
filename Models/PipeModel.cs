@@ -30,7 +30,7 @@ namespace PipeExplorer.Models
         public AclModel Acl { get; }
         public uint ActiveConnections { get; }
 
-        public string Path => $@"\\{Host}\{Name}";
+        public string Path => $@"\\{Host}\pipe\{Name}";
 
         public PipeModel(string host, string name, int maxConn, uint activeConn, AclModel acl)
         {

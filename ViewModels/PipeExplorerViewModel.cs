@@ -54,6 +54,20 @@ namespace PipeExplorer.ViewModels
             }
         }
 
+        public bool ReadAcls
+        {
+            get => settings.ReadAcls;
+            set
+            {
+                if (value != settings.ReadAcls)
+                {
+                    this.RaisePropertyChanging();
+                    settings.ReadAcls = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
         public int RefreshInterval
         {
             get => (int)settings.RefreshInterval.TotalSeconds;
@@ -145,7 +159,7 @@ namespace PipeExplorer.ViewModels
 
             pipesCache
                 .Connect()
-                .Batch(TimeSpan.FromMilliseconds(300))
+                .Batch(TimeSpan.FromMilliseconds(50))
                 .Filter(this.WhenValueChanged(x => x.QuickFilter).Select(BuildFilter))
                 .AutoRefresh(p => p.Pinned)
                 .Sort(SortExpressionComparer<PipeViewModel>.Ascending(p => p))
@@ -163,7 +177,7 @@ namespace PipeExplorer.ViewModels
                 .Select(v => (ImageSource)App.Current.FindResource(v ? "AppIconActive" : "AppIcon"))
                 .Subscribe(v => AppIcon = v);
 
-            pipesCache.AddOrUpdate(Native.GetPipes().Select(p => new PipeViewModel(p, settings.PinnedNames.Contains(p.Name), false)));
+            pipesCache.AddOrUpdate(Native.GetPipes(ReadAcls).Select(p => new PipeViewModel(p, settings.PinnedNames.Contains(p.Name), false)));
             IsRunning = settings.StartImmediately;
         }
 

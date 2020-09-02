@@ -232,6 +232,42 @@ namespace PipeExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read access control lists (ACL). Does not work for busy pipes..
+        /// </summary>
+        public static string SettingsReadAclsHeader {
+            get {
+                return ResourceManager.GetString("SettingsReadAclsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not read.
+        /// </summary>
+        public static string SettingsReadAclsOff {
+            get {
+                return ResourceManager.GetString("SettingsReadAclsOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read.
+        /// </summary>
+        public static string SettingsReadAclsOn {
+            get {
+                return ResourceManager.GetString("SettingsReadAclsOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: reading access control lists may disrupt workflows of processes willing to connect to named pipes, including workflows of system services..
+        /// </summary>
+        public static string SettingsReadAclsWarning {
+            get {
+                return ResourceManager.GetString("SettingsReadAclsWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Refresh interval.
         /// </summary>
         public static string SettingsRefreshInterval {

@@ -42,6 +42,7 @@ namespace PipeExplorer.Services
         TimeSpan HighlightDuration { get; set; }
         TimeSpan RefreshInterval { get; set; }
         bool StartImmediately { get; set; }
+        bool ReadAcls { get; set; }
         WindowState WindowState { get; set; }
         Rect WindowPosition { get; set; }
         IDictionary<string, int> ColumnWidths { get; }
@@ -57,6 +58,7 @@ namespace PipeExplorer.Services
         [Reactive] public TimeSpan HighlightDuration { get; set; } = TimeSpan.FromSeconds(4);       // sec
         [Reactive] public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromSeconds(1);         // sec
         [Reactive] public bool StartImmediately { get; set; } = true;
+        [Reactive] public bool ReadAcls { get; set; } = false;
         [Reactive] public WindowState WindowState { get; set; } = WindowState.Normal;
         [Reactive] public Rect WindowPosition { get; set; }
         public ObservableDictionary<string, int> ColumnWidths { get; } = new ObservableDictionary<string, int>();
@@ -100,6 +102,8 @@ namespace PipeExplorer.Services
                         RefreshInterval = TimeSpan.FromSeconds(interval);
                     if (regKey.GetValue("Start immediately", 1) is int n)
                         StartImmediately = n != 0;
+                    if (regKey.GetValue("Read ACLs", 0) is int n2)
+                        ReadAcls = n2 != 0;
                     if (regKey.GetValue("Window state") is string stateStr && Enum.TryParse<WindowState>(stateStr, true, out var state))
                         WindowState = state;
 
@@ -163,6 +167,7 @@ namespace PipeExplorer.Services
                     regKey.SetValue("Highlight duration", (int)HighlightDuration.TotalSeconds, RegistryValueKind.DWord);
                     regKey.SetValue("Refresh interval", (int)RefreshInterval.TotalSeconds, RegistryValueKind.DWord);
                     regKey.SetValue("Start immediately", StartImmediately, RegistryValueKind.DWord);
+                    regKey.SetValue("Read ACLs", ReadAcls, RegistryValueKind.DWord);
                     regKey.SetValue("Window state", WindowState.ToString(), RegistryValueKind.String);
 
                     if (WindowState == WindowState.Normal)

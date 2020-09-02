@@ -174,6 +174,18 @@
   <data name="SettingsHighlightDuration" xml:space="preserve">
     <value>Highlight duration</value>
   </data>
+  <data name="SettingsReadAclsHeader" xml:space="preserve">
+    <value>Read access control lists (ACL). Does not work for busy pipes.</value>
+  </data>
+  <data name="SettingsReadAclsOff" xml:space="preserve">
+    <value>Do not read</value>
+  </data>
+  <data name="SettingsReadAclsOn" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="SettingsReadAclsWarning" xml:space="preserve">
+    <value>Warning: reading access control lists may disrupt workflows of processes willing to connect to named pipes, including workflows of system services.</value>
+  </data>
   <data name="SettingsRefreshInterval" xml:space="preserve">
     <value>Refresh interval</value>
   </data>

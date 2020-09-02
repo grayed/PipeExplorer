@@ -69,6 +69,13 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. -->
                           Width="400"
                           >
                 <StackPanel Margin="12">
+                    <metro:ToggleSwitch IsOn="{Binding ReadAcls}"
+                                        Header="{x:Static res:Resources.SettingsReadAclsHeader}"
+                                        OnContent="{x:Static res:Resources.SettingsReadAclsOn}"
+                                        OffContent="{x:Static res:Resources.SettingsReadAclsOff}"
+                                        />
+                    <TextBlock Foreground="DarkOrange" Text="{x:Static res:Resources.SettingsReadAclsWarning}" TextWrapping="Wrap" Margin="0, 0, 0, 8" />
+
                     <metro:ToggleSwitch IsOn="{Binding StartImmediately}"
                                         Header="{x:Static res:Resources.SettingsStartImmediatelyHeader}"
                                         OnContent="{x:Static res:Resources.SettingsStartImmediatelyOn}"

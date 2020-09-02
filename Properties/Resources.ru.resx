@@ -174,6 +174,18 @@
   <data name="SettingsHighlightDuration" xml:space="preserve">
     <value>Длительность подсветки</value>
   </data>
+  <data name="SettingsReadAclsHeader" xml:space="preserve">
+    <value>Считывать списки контроля доступа (ACL). Не работает для занятых каналов.</value>
+  </data>
+  <data name="SettingsReadAclsOff" xml:space="preserve">
+    <value>Не считывать</value>
+  </data>
+  <data name="SettingsReadAclsOn" xml:space="preserve">
+    <value>Считывать</value>
+  </data>
+  <data name="SettingsReadAclsWarning" xml:space="preserve">
+    <value>Предупреждение: считывание параметров доступа может нарушить поведение процессов, подключающихся к именованным каналам, в том числе поведение системных служб.</value>
+  </data>
   <data name="SettingsRefreshInterval" xml:space="preserve">
     <value>Интервал обновления</value>
   </data>

@@ -22,6 +22,7 @@ using System.ComponentModel;
 using System.Threading;
 using PipeExplorer.Models;
 using ReactiveUI;
+using Splat;
 
 namespace PipeExplorer.Services
 {
@@ -143,7 +144,8 @@ namespace PipeExplorer.Services
         private void TimerTick(object state)
         {
             var newPipes = new Dictionary<string, PipeModel>();
-            foreach (var newp in Native.GetPipes(Host))
+            var readAcls = Locator.Current.GetService<ISettings>().ReadAcls;
+            foreach (var newp in Native.GetPipes(readAcls, Host))
             {
                 // do not blindly call newPipes.Add(): GetPipes() could return duplicated entries (and it's not its fault)
                 if (prevPipes.TryGetValue(newp.Name, out var oldp))

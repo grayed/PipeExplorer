@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props" Condition="Exists('packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props')" />
+  <Import Project="packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props" Condition="Exists('packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -47,7 +47,7 @@
       <HintPath>packages\ControlzEx.4.3.2\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="DynamicData, Version=6.16.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\DynamicData.6.16.6\lib\net461\DynamicData.dll</HintPath>
+      <HintPath>packages\DynamicData.6.16.8\lib\net461\DynamicData.dll</HintPath>
     </Reference>
     <Reference Include="IX.Abstractions, Version=0.5.3.0, Culture=neutral, PublicKeyToken=029c2b9bf120ba32, processorArchitecture=MSIL">
       <HintPath>packages\IX.Abstractions.0.5.3\lib\net472\IX.Abstractions.dll</HintPath>
@@ -83,20 +83,19 @@
       <HintPath>packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ReactiveUI.11.5.26\lib\net461\ReactiveUI.dll</HintPath>
+      <HintPath>packages\ReactiveUI.11.5.35\lib\net461\ReactiveUI.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.Fody.Helpers, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ReactiveUI.Fody.11.5.26\lib\net461\ReactiveUI.Fody.Helpers.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\ReactiveUI.Fody.11.5.35\lib\net461\ReactiveUI.Fody.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.Validation, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ReactiveUI.Validation.1.5.5\lib\net461\ReactiveUI.Validation.dll</HintPath>
     </Reference>
     <Reference Include="ReactiveUI.WPF, Version=11.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\ReactiveUI.WPF.11.5.26\lib\net472\ReactiveUI.WPF.dll</HintPath>
+      <HintPath>packages\ReactiveUI.WPF.11.5.35\lib\net472\ReactiveUI.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Splat, Version=9.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Splat.9.5.20\lib\net461\Splat.dll</HintPath>
+      <HintPath>packages\Splat.9.5.35\lib\net461\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -139,20 +138,20 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Vanara.Core, Version=3.2.14.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>packages\Vanara.Core.3.2.14\lib\net45\Vanara.Core.dll</HintPath>
+    <Reference Include="Vanara.Core, Version=3.2.15.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>packages\Vanara.Core.3.2.15\lib\net45\Vanara.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Vanara.PInvoke.Cryptography, Version=3.2.14.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>packages\Vanara.PInvoke.Cryptography.3.2.14\lib\net45\Vanara.PInvoke.Cryptography.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Cryptography, Version=3.2.15.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>packages\Vanara.PInvoke.Cryptography.3.2.15\lib\net45\Vanara.PInvoke.Cryptography.dll</HintPath>
     </Reference>
-    <Reference Include="Vanara.PInvoke.Kernel32, Version=3.2.14.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>packages\Vanara.PInvoke.Kernel32.3.2.14\lib\net45\Vanara.PInvoke.Kernel32.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Kernel32, Version=3.2.15.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>packages\Vanara.PInvoke.Kernel32.3.2.15\lib\net45\Vanara.PInvoke.Kernel32.dll</HintPath>
     </Reference>
-    <Reference Include="Vanara.PInvoke.Security, Version=3.2.14.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>packages\Vanara.PInvoke.Security.3.2.14\lib\net45\Vanara.PInvoke.Security.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Security, Version=3.2.15.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>packages\Vanara.PInvoke.Security.3.2.15\lib\net45\Vanara.PInvoke.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Vanara.PInvoke.Shared, Version=3.2.14.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
-      <HintPath>packages\Vanara.PInvoke.Shared.3.2.14\lib\net45\Vanara.PInvoke.Shared.dll</HintPath>
+    <Reference Include="Vanara.PInvoke.Shared, Version=3.2.15.0, Culture=neutral, PublicKeyToken=c37e4080322237fa, processorArchitecture=MSIL">
+      <HintPath>packages\Vanara.PInvoke.Shared.3.2.15\lib\net45\Vanara.PInvoke.Shared.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -226,7 +225,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Fody.6.2.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Fody.6.2.4\build\Fody.targets'))" />
-    <Error Condition="!Exists('packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ReactiveUI.Fody.11.5.26\build\ReactiveUI.Fody.props'))" />
+    <Error Condition="!Exists('packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\ReactiveUI.Fody.11.5.35\build\ReactiveUI.Fody.props'))" />
   </Target>
   <Target Name="EnUsResources" BeforeTargets="PrepareForBuild">
     <Copy SourceFiles="Properties\Resources.resx" DestinationFiles="Properties\Resources.en-US.resx" SkipUnchangedFiles="True" />
